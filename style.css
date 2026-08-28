@@ -2,7 +2,7 @@
 	--bg:#f4f6f8;
 	--card:#ffffff;
 	--accent:#2b8cff;
-	--muted:#6b7280;
+	--muted:#272727;
 }
 
 *{box-sizing:border-box}
@@ -17,7 +17,7 @@ body{
 	background-position: center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	color:#505153;
+	color:#151515;
 }
 
 .center{
@@ -35,7 +35,7 @@ body{
 /* overlay covering the unfilled portion (from left = var(--pct) to right) */
 .progress-bar::after{content:"";position:absolute;left:var(--pct);top:0;bottom:0;right:0;background:var(--bg)}
 .progress-labels{display:flex;gap:1rem;font-weight:600;color:var(--muted);}
-.progress-labels .completed{font-size:0.95rem}
+.progress-labels .completed{font-size:1.05rem}
 
 .progress-percent{color:#16a34a;font-weight:700;margin-top:.5rem;font-size:1.05rem}
 
