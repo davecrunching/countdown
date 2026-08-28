@@ -1,0 +1,48 @@
+:root{
+	--bg:#f4f6f8;
+	--card:#ffffff;
+	--accent:#2b8cff;
+	--muted:#6b7280;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	/* placeholder background image - replace 'bg-placeholder.svg' with your image */
+	background-image: linear-gradient(rgba(255,255,255,0.3), rgba(216, 189, 189, 0.35)), url('countdownphoto.jpeg');
+	background-color: var(--bg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	color:#505153;
+}
+
+.center{
+	min-height:100vh;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	gap:1rem;
+	padding:2rem;
+}
+
+.progress-bar{width:55vw;max-width:1200px;height:36px;position:relative;border-radius:8px;overflow:hidden;--pct:0%;background:#16a34a;border:none;box-shadow:inset 0 0 0 1px rgba(15,23,42,0.06), 0 6px 18px rgba(2,6,23,0.04)}
+
+/* overlay covering the unfilled portion (from left = var(--pct) to right) */
+.progress-bar::after{content:"";position:absolute;left:var(--pct);top:0;bottom:0;right:0;background:var(--bg)}
+.progress-labels{display:flex;gap:1rem;font-weight:600;color:var(--muted);}
+.progress-labels .completed{font-size:0.95rem}
+
+.progress-percent{color:#16a34a;font-weight:700;margin-top:.5rem;font-size:1.05rem}
+
+.progress-area{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+
+.elapsed{color:var(--muted);font-size:1.5rem;margin-top:1rem}
+
+@media (max-width:420px){
+	.progress-bar{height:20px}
+}
