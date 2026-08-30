@@ -33,12 +33,13 @@ function updateProgress(){
     completedDays = daysBetween(start, today) + 1;
   }
 
-  const pct = totalDays > 0 ? Math.round((completedDays / totalDays) * 100) : 100;
+  const pct = totalDays > 0 ? (completedDays / totalDays) * 100 : 100;
+  const pctDisplay = pct.toFixed(1);
 
   completedEl.textContent = completedDays;
   // set CSS variable to show filled portion; overlay covers the rest
-  progressBar.style.setProperty('--pct', pct + '%');
-  messageEl.textContent = `${pct}% of the way`;
+  progressBar.style.setProperty('--pct', pctDisplay + '%');
+  messageEl.textContent = `${pctDisplay}% of the way`;
 
   // compute elapsed since July 24, 2026 and format aversary message
   const parts = computeElapsed(new Date(2026,6,24), today);
