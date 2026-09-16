@@ -2,6 +2,7 @@ const completedEl = document.getElementById('completed');
 const progressBar = document.getElementById('progressBar');
 const messageEl = document.getElementById('message');
 const elapsedEl = document.getElementById('elapsed');
+const countdownEl = document.getElementById('countdown');
 
 function toDateOnly(d){
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -18,9 +19,22 @@ function daysBetween(a,b){
 const year = new Date().getFullYear();
 const start = new Date(year, 6, 27); // month is 0-based -> 6 = July
 const target = new Date(year, 9, 10); // 9 = October
+const targetWithTime = new Date(Date.UTC(year, 9, 10, 7, 5)); // 3:05 AM EDT
+
+function updateCountdown(now){
+  const remainingSeconds = Math.max(0, Math.floor((targetWithTime - now) / 1000));
+  const weeks = Math.floor(remainingSeconds / (7 * 24 * 60 * 60));
+  const days = Math.floor((remainingSeconds % (7 * 24 * 60 * 60)) / (24 * 60 * 60));
+  const hours = Math.floor((remainingSeconds % (24 * 60 * 60)) / (60 * 60));
+  const minutes = Math.floor((remainingSeconds % (60 * 60)) / 60);
+  const seconds = remainingSeconds % 60;
+
+  countdownEl.textContent = `${weeks} weeks ${days} days ${hours}:${minutes}:${seconds} till plane lands`;
+}
 
 function updateProgress(){
   const today = new Date();
+  updateCountdown(today);
   const rawTotal = daysBetween(start, target);
   const totalDays = rawTotal >= 0 ? rawTotal + 1 : 0; // inclusive
 
@@ -47,8 +61,8 @@ function updateProgress(){
 }
 
 updateProgress();
-// update periodically so it stays accurate across days
-setInterval(updateProgress, 60 * 1000);
+// Keep both the date-based progress and live countdown current.
+setInterval(updateProgress, 1000);
 
 function computeElapsed(from, to){
   if (to < from) return [];
