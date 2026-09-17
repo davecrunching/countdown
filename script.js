@@ -1,4 +1,3 @@
-const completedEl = document.getElementById('completed');
 const progressBar = document.getElementById('progressBar');
 const messageEl = document.getElementById('message');
 const elapsedEl = document.getElementById('elapsed');
@@ -28,8 +27,9 @@ function updateCountdown(now){
   const hours = Math.floor((remainingSeconds % (24 * 60 * 60)) / (60 * 60));
   const minutes = Math.floor((remainingSeconds % (60 * 60)) / 60);
   const seconds = remainingSeconds % 60;
+  const twoDigits = value => String(value).padStart(2, '0');
 
-  countdownEl.textContent = `${weeks} weeks ${days} days ${hours}:${minutes}:${seconds} till plane lands`;
+  countdownEl.textContent = `${weeks} weeks ${days} days ${twoDigits(hours)}:${twoDigits(minutes)}:${twoDigits(seconds)} till plane lands`;
 }
 
 function updateProgress(){
@@ -50,7 +50,6 @@ function updateProgress(){
   const pct = totalDays > 0 ? (completedDays / totalDays) * 100 : 100;
   const pctDisplay = pct.toFixed(1);
 
-  completedEl.textContent = completedDays;
   // set CSS variable to show filled portion; overlay covers the rest
   progressBar.style.setProperty('--pct', pctDisplay + '%');
   messageEl.textContent = `${pctDisplay}% of the way`;
