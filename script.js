@@ -14,11 +14,10 @@ function daysBetween(a,b){
   return Math.round((bd - ad) / msPerDay);
 }
 
-// Fixed start and target: July 27 and Oct 10 of this year
-const year = new Date().getFullYear();
-const start = new Date(year, 6, 27); // month is 0-based -> 6 = July
-const target = new Date(year, 9, 10); // 9 = October
-const targetWithTime = new Date(Date.UTC(year, 9, 10, 7, 5)); // 3:05 AM EDT
+// Fixed start and target: October 20 and December 22, 2026
+const start = new Date(2026, 9, 20); // month is 0-based -> 9 = October
+const target = new Date(2026, 11, 22); // 11 = December
+const targetWithTime = new Date(Date.UTC(2026, 11, 22, 21, 30)); // 4:30 PM EST
 
 function updateCountdown(now){
   const remainingSeconds = Math.max(0, Math.floor((targetWithTime - now) / 1000));
